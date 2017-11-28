@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<link href="css/bootstrap.css" rel="stylesheet" />
+		<script>
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<!--//头部-->
+		<header class="mui-bar mui-bar-nav" style="background-color:#FA5D57;">
+			<a class="mui-text-left" style="color:snow;z-index: 1000;">南昌<span class="mui-icon mui-icon-arrowdown"></span></a>
+			<h1 class="mui-title" style="color:snow;">MoGu</h1>
+			<a id="offCanvasBtn" class="mui-pull-right mui-action-menu" style="color:snow;z-index:1000;"><span class="mui-icon mui-icon-bars "></span></a>
+		</header>
+		
+			<!--轮播-->
+		<div id="offCanvasContentScroll" class="mui-content" style="margin-top:-25px;">
+			<div id="slider" class="mui-slider">
+				<div class="mui-slider-group mui-slider-loop" style="">
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#"><img src="image/270748_1495096046131.jpg"></a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#"><img src="image/120178_1490347515940.jpg"></a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#"><img src="image/463771_1498811427502.jpg"></a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#"><img src="image/487375_1499221560339.jpg"></a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#"><img src="image/512215_1499667970690.jpg"></a>
+					</div>
+
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#"><img src="image/270748_1495096046131.jpg"></a>
+					</div>
+				</div>
+				<div class="mui-slider-indicator">
+					<div class="mui-indicator mui-active"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+				</div>
+			</div>
+
+			<!--搜索-->
+			<div class="mui-input-row mui-search" style="background-color: white;">
+				<input id="search" type="search" style="background-color: white;border:1px silver solid; border-radius:50px;margin-top:5px;" class="mui-input-clear" placeholder="">
+			</div>
+
+			<!--九宫格-->
+			<ul id="jiugongfe" class="mui-table-view mui-grid-view mui-grid-9" style="background-color: white;">
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a id="selectist.html">
+						<img src="image/rent-fs3.png" style="height:30px;width:30px;" />
+						<div class="mui-media-body">整租</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a href="#" id="selectist.html">
+						<img src="image/rent-fs2.png" style="height:30px;width:30px;" />
+						<div class="mui-media-body">合租</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a href="#">
+						<img src="image/payment-monthly.png" style="height:30px;width:30px;" />
+						<div class="mui-media-body">蘑菇月付</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a href="#">
+						<img src="image/brand.png" style="height:30px;width:30px;" />
+						<div class="mui-media-body">品牌专区</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a href="#">
+						<img src="image/1ss.png" style="height:30px;width:30px;" />
+						<div class="mui-media-body">通勤找房</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a href="#">
+						<img src="image/1ees.png" style="height:30px;width:30px;" />
+						<div class="mui-media-body">地图找房</div>
+					</a>
+				</li>
+
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a href="#">
+						<img src="image/1ee.png" style="height:30px;width:30px;" />
+						<div class="mui-media-body">保修服务</div>
+					</a>
+				</li>
+
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+					<a href="#">
+						<img src="image/1tyl.png" style="height:30px;width:30px;" />
+						<div class="mui-media-body">支付住房</div>
+					</a>
+				</li>
+			</ul>
+
+			<!--推荐房源-->
+			<ul class="mui-table-view" id="ss">
+				<li>
+					<div class="mui-media-body" style="padding-top: 10px; color: #000000;">
+						&nbsp;&nbsp; &nbsp; <strong>推荐房源</strong>
+
+					</div>
+				</li>
+			</ul>
+			<div class="mui-segmented-control" style="background-color:white;border: 0px #FF8888 solid;margin-bottom: 50px;color:#FF4E48;">
+				<a class="mui-control-item">区域</a>
+
+				<a class="mui-control-item mui-active" id="prive" href="prive">价格</a>
+				<a id="menu-btn" class="mui-control-item" href="Pic.html">面积</a>
+				<a class="mui-control-item" href="#popover">更多筛选</a>
+
+			</div>
+			<ul class="mui-table-view" id="ss" style="margin-top:-40px;margin-bottom: 100px;">
+				<li class="mui-table-view-cell mui-media">
+					<a href="homes.html">
+						<img class="mui-media-object mui-pull-left" src="image/2002150_1499395420461.jpg" style="width:80px;">
+						<div class="mui-media-body">
+							闵行区-博乐诗服务公寓
+							<br>
+							<span style="font-size: 12px;">一室一厅一卫-40.0平方米 A型</span>
+
+							<p class="mui-ellipsis" style="background: url(image/Screenshot_2017-07-12-08-34-39_3420119_3449993.png)  no-repeat;background-size:20px ; background-position:-5px;text-indent:2em;padding-top: 10px;font-size: 12px;">
+								能和心爱的人一起睡觉， 是件幸福的事情；可是，打呼噜怎么办？
+							</p>
+							<code style="background-color: #E7F5FE; color:#56B6FB ; font-size: 12px;">酒店式公寓</code> <i class="mui-pull-right" style="color: #F43500;">3500元/月</i>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div id="ww"></div>
+
+		<!--脚部导航-->
+		<nav class="mui-bar mui-bar-tab" style="background: white;">
+			<a class="mui-tab-item mui-active" index="0" href="index.html">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item " index="1" href="heart.html">
+				<span class="mui-icon mui-icon-paperplane"></span>
+				<span class="mui-tab-label">心愿单</span>
+			</a>
+			<a class="mui-tab-item " index="2" href="index.html">
+				<span class="mui-icon mui-icon-compose"></span>
+				<span class="mui-tab-label">管理</span>
+			</a>
+			<a class="mui-tab-item " index="3" href="index.html">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我</span>
+			</a>
+		</nav>
+
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script>
+			//      	轮播
+			var gallery = mui('.mui-slider');
+			gallery.slider({
+				interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
+			});
+
+			//			查询
+			$("#search").blur(function() {
+				if($("#search").val() != "") {
+					query();
+				} else {
+					query();
+				}
+			});
+			mui.init();
+
+			//退出
+			var first = null;
+			mui.back = function() {
+				//首次按键，提示‘再按一次退出应用’
+				if(!first) {
+					first = new Date().getTime();
+					mui.toast('再按一次退出应用');
+					setTimeout(function() {
+						first = null;
+					}, 1000);
+				} else {
+					if(new Date().getTime() - first < 1000) {
+						plus.runtime.quit();
+					}
+				}
+
+			}
+		</script>
+		<script type="text/javascript">
+			mui('body').on('tap', 'a', function() {
+				window.top.location.href = this.href;
+			});
+		</script>
+	</body>
+
+</html>

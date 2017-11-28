@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>登陆</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" href="#offCanvasSide" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			.mui-table-view .mui-media-object {
+				line-height: 100px;
+				max-width: 100px;
+				height: 100px;
+			}
+			
+			.mui-segmented-control .mui-control-item.mui-active {
+				color: #FF8888;
+				background-color: white;
+				border-bottom: 2px #FF8888 solid;
+			}
+			
+			.mui-segmented-control {
+				border: 0px #FF8888 solid;
+			}
+			
+			.mui-segmented-control .mui-control-item {
+				color: #FF8888;
+				border-left: 0px #FF8888 solid;
+			}
+		</style>
+	</head>
+	<style>
+
+	</style>
+
+	<body>
+		<div class="mui-content">
+			<!--列表导航带箭头-->
+			<!--列表-->
+			<ul class="mui-table-view" id="thead" style="margin-top: 2px;">
+				<li class="mui-table-view-cell mui-media" id="selectist.html">
+					<a href="javascript:;" style="margin: -15px -15px;">
+						<span class="mui-navigate-right"></span>
+						<img class="mui-media-object mui-pull-left" style="line-height: 30px; max-width: 30px; height: 30px;" src="image/rent-fs3.png">
+						<div class="mui-media-body">
+							<p style="margin-top: 5px;">查找房子</p>
+						</div>
+					</a>
+				</li>
+
+				<li class="mui-table-view-cell mui-media" id="imageviewer.html">
+					<a href="javascript:;" style="margin: -15px -15px;">
+						<span class="mui-navigate-right"></span>
+						<img class="mui-media-object mui-pull-left" style="line-height: 30px; max-width: 30px; height: 30px;" src="image/u1.png">
+						<div class="mui-media-body">
+							<p style="margin-top: 5px;">我的收藏</p>
+
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-table-view-divider">
+				</li>
+			</ul>
+			<div class="mui-segmented-control">
+				<a class="mui-control-item mui-active">房源列表</a>
+				<a class="mui-control-item" id="openfubu">发布房源</a>
+			</div>
+
+			<ul class="mui-table-view" id="item2">
+
+			</ul>
+		</div>
+
+		<!--脚部导航-->
+		<nav class="mui-bar mui-bar-tab" style="background: white;">
+			<a class="mui-tab-item mui-active" index="0" href="index.html">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item " index="1" href="heart.html">
+				<span class="mui-icon mui-icon-paperplane"></span>
+				<span class="mui-tab-label">心愿单</span>
+			</a>
+			<a class="mui-tab-item " index="2" href="guanli.html">
+				<span class="mui-icon mui-icon-compose"></span>
+				<span class="mui-tab-label">管理</span>
+			</a>
+			<a class="mui-tab-item " index="3" href="me.html">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我</span>
+			</a>
+		</nav>
+		<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script src="js/weixin.js"></script>
+		<script type="text/javascript" src="js/base.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			/*启用超链接效果*/
+
+			/**
+			 * 连接
+			 */
+			mui("#thead").on('tap', '.mui-table-view-cell', function() {
+				var ids = this.getAttribute("id");
+
+				mui.openWindow({
+					id: ids,
+					url: ids
+				});
+			})
+
+			mui(".mui-segmented-control").on('tap', '#openfubu', function() {
+				mui.openWindow({
+					id: "publish",
+					url: "publish.html"
+
+				});
+			})
+
+			mui.plusReady(function() {
+				window.addEventListener("swipeleft", function() {
+					swipeToChild(3);
+				});
+				window.addEventListener("swiperight", function() {
+					swipeToChild(1);
+				});
+
+				//下拉刷新
+
+				var num = 1;
+
+				ws = plus.webview.currentWebview();
+				ws.setPullToRefresh({
+					support: true,
+					height: "50px",
+					range: "200px",
+					contentdown: {
+						caption: "下拉可以刷新"
+					},
+					contentover: {
+						caption: "释放立即刷新"
+					},
+					contentrefresh: {
+						caption: "正在刷新..."
+					}
+				}, function() {
+					plus.nativeUI.showWaiting();
+					cou = 0;
+					count = 1;
+					mui('#ww').pullRefresh().endPullupToRefresh((++cou > 2));
+					num + 1;
+
+					mui.ajax(base + "/house/myHousees", {
+						"type": "POST",
+						"dataType": "json",
+						"timeout": 10000,
+
+						"success": function(jsons) {
+
+							//文档操作
+
+							$("#item2").empty("mui-table-view-cell");
+							$li1 = $("#tuichu").clone(true);
+							$li1.removeClass("mui-hidden");
+
+							$.each(jsons.rows, function(i, obj) {
+
+								mui.toast()
+
+								var $li = $("#lis").clone(true);
+
+								$li.find("a").attr("name", obj.hid);
+
+								$li.removeClass("mui-hidden");
+								$li.find("#imgsssrc").attr("src", "data:image/png;base64," + obj.imgBase64);
+								$li.find(".mui-media-sp0").text(obj.street.district.dname + "-" + obj.title);
+								$li.find(".mui-media-sp").html(obj.type.tname + "-" + obj.floorage + "平方米 ");
+								$li.find("#nody .mui-ellipsis").html(obj.description);
+								$li.find("#nody code").text("精装公寓");
+								$li.find(".mui-media-body i").text("￥" + obj.price);
+
+								$("#item2").append($li);
+								mui("#item2 #lis").on('tap', 'a', function() {
+									var ids = this.getAttribute("id");
+									//var name=this.getAttribute("name");
+									mui.openWindow("Pic.html", "Pic", {
+										extras: {
+											"hid": obj.hid
+										}
+									});
+								})
+
+							});
+							plus.nativeUI.closeWaiting();
+
+						},
+						"error": function(xhr, type, e) {
+							mui.toast("网络异常");
+						}
+					});
+
+					ws.endPullToRefresh(); //非常重要
+
+				});
+
+				mui.ajax(base + "/house/myHousees", {
+					"type": "POST",
+					"dataType": "json",
+					"timeout": 10000,
+
+					"success": function(jsons) {
+
+						//文档操作
+
+						$("#item2").empty("mui-table-view-cell");
+						$li1 = $("#tuichu").clone(true);
+						$li1.removeClass("mui-hidden");
+
+						$.each(jsons.rows, function(i, obj) {
+							//console.log(111)
+							mui.toast()
+							console.log(obj.hid)
+							var $li = $("#lis").clone(true);
+
+							$li.find("a").attr("name", obj.hid);
+
+							$li.removeClass("mui-hidden");
+							//操作base64图片
+							$li.find("#imgsssrc").attr("src", "data:image/png;base64," + obj.imgBase64);
+							$li.find(".mui-media-sp0").text(obj.street.district.dname + "-" + obj.title);
+							$li.find(".mui-media-sp").html(obj.type.tname + "-" + obj.floorage + "平方米 ");
+							$li.find("#nody .mui-ellipsis").html(obj.description);
+							$li.find("#nody code").text("酒店式公寓");
+							$li.find(".mui-media-body i").text("￥" + obj.price);
+							$("#item2").append($li);
+							mui("#item2 #lis").on('tap', 'a', function() {
+								var ids = this.getAttribute("id");
+								//var name=this.getAttribute("name");
+								mui.openWindow("Pic.html", "Pic", {
+									extras: {
+										"hid": obj.hid
+									}
+								});
+							})
+
+						});
+
+					},
+					"error": function(xhr, type, e) {
+						mui.toast("网络异常");
+					}
+				});
+
+			});
+		</script>
+		<script type="text/javascript">
+			mui('body').on('tap', 'a', function() {
+				window.top.location.href = this.href;
+			});
+		</script>
+	</body>
+
+</html>

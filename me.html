@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			.mui-slider {
+				z-index: 1;
+				margin-top: 20px;
+				overflow: hidden;
+				width: 100%;
+			}
+			
+			.mui-bar {
+				position: fixed;
+				z-index: 10;
+				right: 0;
+				left: 0;
+				height: 0px;
+				padding-right: 10px;
+				padding-left: 10px;
+				border-bottom: 0;
+				background-color: #E3E3E3;
+				-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, .85);
+				box-shadow: 0 0 1px rgba(0, 0, 0, .85);
+				-webkit-backface-visibility: hidden;
+				backface-visibility: hidden;
+			}
+			
+			a {
+				text-decoration: none;
+				color: black;
+			}
+			
+			.mui-table-view .mui-media-object {
+				line-height: 80px;
+				max-width: 80px;
+				height: 80px;
+			}
+		</style>
+	</head>
+
+	<body style="background-color: white;">
+
+		<header class="mui-bar mui-bar-nav" style="position: relative;">
+		</header>
+
+		<div class="mui-content" style="background: url(image/banner4.jpg); background-size:cover;height:160px ;">
+			<div class="mui-text-center">
+				<a href="wupdate.html"><img src="image/muguss.png" id="toux" style="border-radius:42px; width:50px; height: 50px;">
+					<p style="color: white;"><span id="phone">159****9589</span></p>
+					<p style="font-size: 12px;padding-top:-20px;">查看或编辑个人信息</p>
+				</a>
+			</div>
+
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media" id="person.html">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="image/1tyl.png" style="width: 20px; height: 20px;">
+						<div class="mui-media-body">
+							我的房源
+							<span class="mui-pull-right mui-icon mui-icon-arrowright" style="margin-top:-5px;color: #ACACB4;"></span>
+						</div>
+
+					</a>
+				</li>
+
+				<li class="mui-table-view-cell mui-media" id="publish.html">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="image/rent-fs3.png" style="width: 20px; height: 20px;">
+						<div class="mui-media-body">
+							发布房源
+							<span class="mui-pull-right mui-icon mui-icon-arrowright" style="margin-top:-5px;color: #ACACB4;"></span>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media" id="wupdate.html">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="image/favicon.ico" style="width: 20px; height: 20px;">
+
+						<div class="mui-media-body">
+							个人中心
+							<span class="mui-pull-right mui-icon mui-icon-arrowright" style="margin-top:-5px;color: #ACACB4;"></span>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media" id="setting.html">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="image/u1.png" style="width: 20px; height: 20px;">
+
+						<div class="mui-media-body">
+							设置
+							<span class="mui-pull-right mui-icon mui-icon-arrowright" style="margin-top:-5px;color: #ACACB4;"></span>
+						</div>
+					</a>
+				</li>
+			</ul>
+
+		</div>
+
+		<!--脚部导航-->
+		<nav class="mui-bar mui-bar-tab" style="background: white;">
+			<a class="mui-tab-item mui-active" index="0" href="index.html">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item " index="1" href="heart.html">
+				<span class="mui-icon mui-icon-paperplane"></span>
+				<span class="mui-tab-label">心愿单</span>
+			</a>
+			<a class="mui-tab-item " index="2" href="guanli.html">
+				<span class="mui-icon mui-icon-compose"></span>
+				<span class="mui-tab-label">管理</span>
+			</a>
+			<a class="mui-tab-item " index="3" href="me.html">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我</span>
+			</a>
+		</nav>
+
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script type="text/javascript" src="js/base.js"></script>
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/weixin.js"></script>
+	<script>
+		/*启用超链接效果*/
+
+		var gallery = mui('.mui-slider');
+
+		gallery.slider({
+			interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
+		});
+		mui(".mui-table-view").on('tap', '.mui-table-view-cell', function() {
+			var ids = this.getAttribute("id");
+
+			mui.openWindow({ id: ids, url: ids });
+		})
+		mui.plusReady(function() {
+			window.addEventListener("swiperight", function() {
+				swipeToChild(2);
+			});
+
+			/*我的信息**/
+			mui.ajax(base + "/user/checkLogin", {
+				"type": "POST",
+				"dataType": "json",
+				"timeout": 10000,
+				"success": function(json) {
+					console.info(json.code);
+					console.info(json.USER.imgBase64);
+
+					$("#phone").text(json.USER.phone);
+
+					if(json.USER.imgBase64 != null) {
+						$("#toux").attr("src", "data:image/png;base64," + json.USER.imgBase64)
+					}
+
+				},
+				"error": function(xhr, type, e) {
+					mui.toast("网络异常");
+					plus.nativeUI.closeWaiting();
+				}
+
+			});
+
+		});
+	</script>
+	<script type="text/javascript">
+		mui('body').on('tap', 'a', function() {
+			window.top.location.href = this.href;
+		});
+	</script>
+	</body>
+
+</html>
